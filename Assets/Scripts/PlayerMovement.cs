@@ -9,16 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     public float speed = 6f;
     public float jumpingPower = 11f;
+    public float dashPower = 20;
     private bool isFacingRight = true;
     private bool _isGrounded = false;
     private float windSpeed = 250f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    PlayerAttack pla;
+    bool canJump = true;
+    public int jump = 1;
     // Start is called before the first frame update
     void Start()
     {
-        
+        pla = GetComponent<PlayerAttack>();
     }
 
     // Update is called once per frame
@@ -26,24 +30,30 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         Flip();
-        _isGrounded = IsGrounded();
+        _isGrounded = IsGrounded() && canJump == true;
+        if (_isGrounded == true && pla.isEvil == true) jump = 1;
+        if (_isGrounded == true && pla.isEvil == false) jump = 2;
     }
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-        if(Input.GetButton("Jump") && _isGrounded == true)
+        if(Input.GetButton("Jump") && jump > 0 && canJump == true)
         {
             Jump();
+            StartCoroutine(ReloadDash());
         }
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
-        {
-            JumpLow();
-        }
+        //if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
+        //{
+            //JumpLow();
+        //}
+        
     }
     private void Jump()
     {
+        jump -= 1;
         rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
     }
+    
     private void JumpLow()
     {
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
@@ -72,6 +82,12 @@ public class PlayerMovement : MonoBehaviour
         {
             Floating();
         }
+    }
+    IEnumerator ReloadDash()
+    {
+        canJump = false;
+        yield return new WaitForSeconds(0.2f);
+        canJump = true;
     }
     
 }

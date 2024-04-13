@@ -8,6 +8,7 @@ public class PlayerMovementDescription : MonoBehaviour
     [SerializeField] private float jumpSpeed;
     [SerializeField] public PlayerMovementDescription otherForm;
     [SerializeField] public GameObject myGhost;
+    [SerializeField] ParticleSystem soulPart;
     public string id;
     PlayerMovement pl;
 
@@ -51,7 +52,7 @@ public class PlayerMovementDescription : MonoBehaviour
             Destroy(FindObjectOfType<GhostFriendly>().gameObject);
             FindObjectOfType<PlayerAttack>().isEvil = false;
         }
-        
+        soulPart.Play();
       
     }
 }

@@ -8,10 +8,13 @@ public class PlayerAttack : MonoBehaviour
     public bool isEvil = false;
     bool canAttack = true;
     [SerializeField] GameObject attackCollider;
+    [SerializeField] Animator anim;
+    PlayerMovement pl;
+    bool canDash = true;
     // Start is called before the first frame update
     void Start()
     {
-        
+        pl = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -22,6 +25,10 @@ public class PlayerAttack : MonoBehaviour
         {
             StartCoroutine(Attacking());
         }
+        if (Input.GetKey(KeyCode.Mouse1) && canDash == true)
+        {
+            StartCoroutine(Dashing());
+        }
     }
     IEnumerator Attacking()
     {
@@ -31,5 +38,15 @@ public class PlayerAttack : MonoBehaviour
         attackCollider.SetActive(false);
         yield return new WaitForSeconds(timeBetweenAttacks);
         canAttack = true;
+    }
+    IEnumerator Dashing()
+    {
+        canDash = false;
+        pl.gameObject.layer = 7;
+        anim.SetTrigger("Dash");
+        yield return new WaitForSeconds(0.5f);
+        pl.gameObject.layer = 6;
+        yield return new WaitForSeconds(1f);
+        canDash = true;
     }
 }
