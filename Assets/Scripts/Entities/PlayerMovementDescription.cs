@@ -5,6 +5,7 @@ public class PlayerMovementDescription : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
     PlayerMovement pl;
+    PlayerHealth plh;
 
     [SerializeField] public PlayerMovementDescription otherForm;
     [SerializeField] public GameObject myGhost;
@@ -17,7 +18,7 @@ public class PlayerMovementDescription : MonoBehaviour
         {
             Instantiate(otherForm.myGhost, transform.position, transform.rotation);
         }
-
+        plh = GetComponentInParent<PlayerHealth>();
         pl = GetComponentInParent<PlayerMovement>();
         pl.speed = speed;
         pl.jumpingPower = jumpSpeed;
@@ -48,9 +49,11 @@ public class PlayerMovementDescription : MonoBehaviour
 
         if (id == "friendly")
         {
+            
             pl.transform.position = FindObjectOfType<GhostFriendly>().transform.position;
             Destroy(FindObjectOfType<GhostFriendly>().gameObject);
             FindObjectOfType<PlayerAttack>().isEvil = false;
+            plh.StartHealing();
         }
 
         soulPart.Play();

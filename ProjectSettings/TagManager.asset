@@ -9,6 +9,8 @@ TagManager:
   - Attack
   - Lever arm
   - Wind
+  - WindHorizontal
+  - EnemyHit
   layers:
   - Default
   - TransparentFX

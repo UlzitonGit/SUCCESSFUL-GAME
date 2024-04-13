@@ -11,4 +11,14 @@ public class Lift : MonoBehaviour
         if(up == false) transform.position = Vector3.Lerp(transform.position, lowwerPoint.position, Time.deltaTime);
         if (up == true) transform.position = Vector3.Lerp(transform.position, higherPoint.position, Time.deltaTime);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerMovement>() != null) collision.transform.parent = transform;
+
+
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerMovement>() != null) collision.transform.parent = null;
+    }
 }

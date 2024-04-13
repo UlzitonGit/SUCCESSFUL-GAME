@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     public float speed = 6f;
     public float dashPower = 20;
+    private bool canWalk = true;
 
     public float jumpingPower = 11f;
     private bool canJump = true;
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (canWalk == false) return;
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if(Input.GetButton("Jump") && jump > 0 && canJump == true)
         {
@@ -68,6 +70,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     private void Floating() => rb.velocity = new Vector2(rb.velocity.x, windSpeed * Time.deltaTime);
+    private void FloatingHor() => rb.velocity = new Vector2(speed, rb.velocity.y * Time.deltaTime);
+    public void StackInAir()
+    {
+        if (IsGrounded() == true) return;
+        rb.gravityScale = 0;
+        StartCoroutine(AirHolder());
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -75,8 +84,27 @@ public class PlayerMovement : MonoBehaviour
         {
             Floating();
         }
+        if (collision.CompareTag("WindHorizontal"))
+        {
+            FloatingHor();
+            canWalk = false;
+        }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
 
+        if (collision.CompareTag("WindHorizontal"))
+        {
+            
+            canWalk = true;
+        }
+    }
+    IEnumerator AirHolder()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        yield return new WaitForSeconds(0.2f);
+        rb.gravityScale = 2;
+    }
     IEnumerator ReloadDash()
     {
         canJump = false;

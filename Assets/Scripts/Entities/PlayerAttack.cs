@@ -28,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
     {
         canAttack = false;
         attackCollider.SetActive(true);
+        pl.StackInAir();
         yield return new WaitForSeconds(0.1f);
         attackCollider.SetActive(false);
         yield return new WaitForSeconds(timeBetweenAttacks);
