@@ -17,7 +17,9 @@ public class PlayerMovementDescription : MonoBehaviour
         {
             Instantiate(otherForm.myGhost, transform.position, transform.rotation);
         }
-       
+        pl = GetComponentInParent<PlayerMovement>();
+        pl.speed = speed;
+        pl.jumpingPower = jumpSpeed;
     }
     // Update is called once per frame
     void Update()
@@ -41,11 +43,13 @@ public class PlayerMovementDescription : MonoBehaviour
         {
             pl.transform.position = FindObjectOfType<GhostEvil>().transform.position;
             Destroy(FindObjectOfType<GhostEvil>().gameObject);
+            FindObjectOfType<PlayerAttack>().isEvil = true;
         }
         if (id == "friendly")
         {
             pl.transform.position = FindObjectOfType<GhostFriendly>().transform.position;
             Destroy(FindObjectOfType<GhostFriendly>().gameObject);
+            FindObjectOfType<PlayerAttack>().isEvil = false;
         }
         
       
