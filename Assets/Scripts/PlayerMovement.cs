@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpingPower = 11f;
     private bool isFacingRight = true;
     private bool _isGrounded = false;
-
+    private float windSpeed = 250f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -62,4 +62,16 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+    private void Floating()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, windSpeed * Time.deltaTime);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Wind"))
+        {
+            Floating();
+        }
+    }
+    
 }
