@@ -1,34 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float timeBetweenAttacks = 1;
-    public bool isEvil = false;
-    bool canAttack = true;
     [SerializeField] GameObject attackCollider;
     [SerializeField] Animator anim;
+    public float timeBetweenAttacks = 1;
+    private bool canAttack = true;
+
     PlayerMovement pl;
     bool canDash = true;
-    // Start is called before the first frame update
+
+    public bool isEvil = false;
+
     void Start()
     {
         pl = GetComponent<PlayerMovement>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isEvil == false) return;
-        if(Input.GetKey(KeyCode.Mouse0) && canAttack == true) 
-        {
-            StartCoroutine(Attacking());
-        }
-        if (Input.GetKey(KeyCode.Mouse1) && canDash == true)
-        {
-            StartCoroutine(Dashing());
-        }
+        if(Input.GetKey(KeyCode.Mouse0) && canAttack == true) StartCoroutine(Attacking());
+        if (Input.GetKey(KeyCode.Mouse1) && canDash == true) StartCoroutine(Dashing());
     }
     IEnumerator Attacking()
     {

@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementDescription : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
+    PlayerMovement pl;
+
     [SerializeField] public PlayerMovementDescription otherForm;
     [SerializeField] public GameObject myGhost;
     [SerializeField] ParticleSystem soulPart;
     public string id;
-    PlayerMovement pl;
 
     private void Awake()
     {      
@@ -18,11 +17,12 @@ public class PlayerMovementDescription : MonoBehaviour
         {
             Instantiate(otherForm.myGhost, transform.position, transform.rotation);
         }
+
         pl = GetComponentInParent<PlayerMovement>();
         pl.speed = speed;
         pl.jumpingPower = jumpSpeed;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -37,7 +37,6 @@ public class PlayerMovementDescription : MonoBehaviour
     }
     public void ChangeParameters()
     {
-        pl = GetComponentInParent<PlayerMovement>();
         pl.speed = speed;
         pl.jumpingPower = jumpSpeed;
         if (id == "evil")
@@ -46,13 +45,14 @@ public class PlayerMovementDescription : MonoBehaviour
             Destroy(FindObjectOfType<GhostEvil>().gameObject);
             FindObjectOfType<PlayerAttack>().isEvil = true;
         }
+
         if (id == "friendly")
         {
             pl.transform.position = FindObjectOfType<GhostFriendly>().transform.position;
             Destroy(FindObjectOfType<GhostFriendly>().gameObject);
             FindObjectOfType<PlayerAttack>().isEvil = false;
         }
+
         soulPart.Play();
-      
     }
 }

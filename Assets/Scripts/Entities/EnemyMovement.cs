@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -7,28 +5,27 @@ public class EnemyMovement : MonoBehaviour
     Transform player;
     Rigidbody2D rb;
     public float speed = 3;
-    bool isRaged = false;
+    
     [SerializeField] Transform  point1;
     [SerializeField] Transform point2;
     public int point = 0;
+
+    #region Unused
     bool canSwitchPoint = true;
-    
-    // Start is called before the first frame update
+    bool isRaged = false;
+    #endregion
+
     void Start()
     {
-        
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerMovement>().transform;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float distanceFromPlayer = player.position.x - transform.position.x;
-
         if (Mathf.Abs(distanceFromPlayer) < 15) Chaising(distanceFromPlayer);
         else Finding();
-        
     }
     private void Chaising(float distanceFromPlayer)
     {
@@ -53,11 +50,10 @@ public class EnemyMovement : MonoBehaviour
             point = 0;
             return;
         }
+
         if (distanceFromPoint < 0) distanceFromPoint = -1;
         if (distanceFromPoint > 0) distanceFromPoint = 1;
         rb.velocity = new Vector2(distanceFromPoint * speed, rb.velocity.y);
-        
-       
     }
     
 }

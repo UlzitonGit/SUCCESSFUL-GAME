@@ -5,7 +5,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float cameraSpeed;
     private Vector3 pos;
-    // Start is called before the first frame update
     void Awake()
     {
         if (!player)
