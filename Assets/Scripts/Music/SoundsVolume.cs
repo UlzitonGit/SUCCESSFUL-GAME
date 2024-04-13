@@ -17,7 +17,7 @@ public class SoundsVolume : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
-    #endregion [SerializeField]
+    #endregion
 
     private void Awake()
     {
