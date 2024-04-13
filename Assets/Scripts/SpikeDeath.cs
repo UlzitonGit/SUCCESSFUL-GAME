@@ -23,8 +23,7 @@ public class SpikeDeath : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            string CurrentSceneName = SceneManager.GetActiveScene().name; 
-            SceneManager.LoadScene(CurrentSceneName);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
