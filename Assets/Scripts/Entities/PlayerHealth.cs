@@ -1,5 +1,6 @@
 
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,18 +8,22 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Image hpBar;
+    [SerializeField] TextMeshProUGUI HPtext;
     float health = 1;
+    float healthToText;
     bool canBeDamaged = true;
     PlayerAttack pl;
     private void Start()
     {
         pl = GetComponent<PlayerAttack>();
+        healthToText = health * 100;
     }
     public void GetDamage(float damage)
     {
         if (canBeDamaged == false) return;
         StartCoroutine(Immortallity());
         health -= damage;
+        HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
         hpBar.fillAmount = health;
         if(health <= 0.05f)
         {
