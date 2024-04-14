@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -6816143279074924024}
   - component: {fileID: -2151013423894901789}
   - component: {fileID: 3116343461547802654}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: GhostEvil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6194977086177577402}
   - component: {fileID: 836749437887972521}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,8 +134,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5909675184194634438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.00000023842, y: 0.00000023842, z: 0}
+  m_LocalScale: {x: 0.10606965, y: 0.10606965, z: 0.10606965}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2088954918812962219}
@@ -182,8 +182,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.20392157}
+  m_Sprite: {fileID: 21300000, guid: ad0d41ae55f8e6542acc9cbca14ae8e8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.08627451}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

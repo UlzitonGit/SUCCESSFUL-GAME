@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public int jump = 1;
 
     private bool isFacingRight = true;
-    private bool _isGrounded = false;
+    public bool _isGrounded = false;
     private float windSpeed = 250f;
 
     private bool isDashing = false;

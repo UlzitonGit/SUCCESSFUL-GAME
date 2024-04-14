@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour
         if (collision.CompareTag("Attack") && canBeDamaged == true)
         {
             StartCoroutine(Immortality());
-            health -= 0.35f;
+            health -= 0.55f;
             hpBar.fillAmount = health;
             if (health <= 0) Destroy(gameObject);
         }

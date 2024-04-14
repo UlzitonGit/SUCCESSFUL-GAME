@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] GameObject attackCollider;
     [SerializeField] Animator anim;
+    [SerializeField] ParticleSystem part;
     public float timeBetweenAttacks = 1;
     private bool canAttack = true;
 
@@ -36,13 +37,14 @@ public class PlayerAttack : MonoBehaviour
     }
     IEnumerator Dashing()
     {
+        part.Play();
         canDash = false;
         pl.gameObject.layer = 7;
         anim.SetTrigger("Dash");
         pl.Dash();
         yield return new WaitForSeconds(0.3f);
         pl.gameObject.layer = 6;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         canDash = true;
     }
 }

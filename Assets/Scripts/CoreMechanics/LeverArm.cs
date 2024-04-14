@@ -13,14 +13,14 @@ public class LeverArm : MonoBehaviour
         {
             _lift.up = false;
             StartCoroutine(Reloading());
-            anim.SetBool("Up", false);
+            anim.SetTrigger("Switch");
             return;
         }
         else
         { 
             _lift.up = true;
             StartCoroutine(Reloading());
-            anim.SetBool("Up", true);
+            anim.SetTrigger("Switch");
             return;
         }
     }
