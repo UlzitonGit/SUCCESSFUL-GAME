@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SpikeDeath : MonoBehaviour
 {     
@@ -7,7 +6,7 @@ public class SpikeDeath : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            FindObjectOfType<PlayerHealth>().GetDamage(0.2f);
+            FindObjectOfType<PlayerHealth>().GetDamageCheck(0.2f);
         }
     }
 }

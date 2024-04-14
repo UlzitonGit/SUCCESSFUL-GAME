@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 
     private Camera cam;
     private float maxZoom = 5f;
-    private float minZoom = 15f;
+    private float minZoom = 10f;
     private float sensitivity = 1f;
     private float speed = 30f;
     private float targetZoom;

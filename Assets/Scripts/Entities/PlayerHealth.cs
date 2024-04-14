@@ -9,26 +9,14 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Image hpBar;
     [SerializeField] TextMeshProUGUI HPtext;
-    float health = 1;
-    float healthToText;
+    public float health = 1;
+    public float healthToText;
     bool canBeDamaged = true;
     PlayerAttack pl;
     private void Start()
     {
         pl = GetComponent<PlayerAttack>();
         healthToText = health * 100;
-    }
-    public void GetDamage(float damage)
-    {
-        if (canBeDamaged == false) return;
-        StartCoroutine(Immortallity());
-        health -= damage;
-        HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
-        hpBar.fillAmount = health;
-        if(health <= 0.05f)
-        {
-            Death();
-        }
     }
     public void Death()
     {
@@ -38,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.CompareTag("EnemyHit"))
         {
-            GetDamage(0.2f);
+            GetDamageCheck(0.2f);
         }
     }
     IEnumerator Immortallity()
@@ -61,7 +49,26 @@ public class PlayerHealth : MonoBehaviour
             if (health > 1) health = 1;
             StartCoroutine(PassiveHeal());
         }
+    }
+    public void GetDamageCheck(float damage)
+    {
+        if (canBeDamaged == false) return;
+        StartCoroutine(GetDamage(damage));
+    }
+    IEnumerator GetDamage(float damage)
+    {
         
-
+        StartCoroutine(Immortallity());
+        for (float i = 0; i < damage; i += 0.05f)
+        {
+            health -= 0.05f;
+            hpBar.fillAmount = health;
+            HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
+            yield return new WaitForSeconds(0.1f);
+        }
+        if (health <= 0.05f)
+        {
+            Death();
+        }
     }
 }

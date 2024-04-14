@@ -51479,6 +51479,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 1427570212}
   HPtext: {fileID: 1653951035}
+  health: 1
+  healthToText: 0
 --- !u!4 &1646057978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5662090132005170116, guid: 3da4c15bba431b24f8f1ecef097400e8, type: 3}
@@ -51521,6 +51523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodSideImage: {fileID: 687898075}
   badSideImage: {fileID: 2119154987}
+  playerHealth: {fileID: 1628815387}
+  HP_text: {fileID: 1653951035}
 --- !u!114 &1649622636
 MonoBehaviour:
   m_ObjectHideFlags: 0
