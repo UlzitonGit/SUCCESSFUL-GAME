@@ -5,13 +5,16 @@ public class EnemyMovement : MonoBehaviour
     Transform player;
     Rigidbody2D rb;
     public float speed = 3;
-    
+
+    public int range = 15;
+    public int rangeAttack = 5;
     [SerializeField] Transform  point1;
     [SerializeField] Transform point2;
     public int point = 0;
 
-    EnemyAttack _enemyAttack;
-
+    [SerializeField] EnemyAttack _enemyAttack;
+    [SerializeField] EnemyDistanceAttack _enemyAttackD;
+    EnemyHealth enh;
     #region Unused
     //bool canSwitchPoint = true;
     //bool isRaged = false;
@@ -21,14 +24,17 @@ public class EnemyMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerMovement>().transform;
-        _enemyAttack = GetComponent<EnemyAttack>();
+        enh = GetComponent<EnemyHealth>();
+        
     }
 
     void FixedUpdate()
     {
+        if (enh.health <= 0) return;
         float distanceFromPlayer = player.position.x - transform.position.x;
-        if (Mathf.Abs(distanceFromPlayer) < 15) Chaising(distanceFromPlayer);
-        if (Mathf.Abs(distanceFromPlayer) < 5) _enemyAttack.Attack();
+        if (Mathf.Abs(distanceFromPlayer) < range) Chaising(distanceFromPlayer);
+        if (Mathf.Abs(distanceFromPlayer) < rangeAttack && _enemyAttack != null) _enemyAttack.Attack();
+        if (Mathf.Abs(distanceFromPlayer) < rangeAttack && _enemyAttackD != null) _enemyAttackD.Attack(gameObject.transform.localScale.x);
         else Finding();
     }
     private void Chaising(float distanceFromPlayer)

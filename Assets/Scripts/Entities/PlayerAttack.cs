@@ -5,6 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] GameObject attackCollider;
     [SerializeField] Animator anim;
+    [SerializeField] ParticleSystem attack;
     [SerializeField] ParticleSystem part;
     public float timeBetweenAttacks = 1;
     private bool canAttack = true;
@@ -28,10 +29,11 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Attacking()
     {
         canAttack = false;
-        attackCollider.SetActive(true);
+        
         pl.StackInAir();
-        yield return new WaitForSeconds(0.1f);
-        attackCollider.SetActive(false);
+        anim.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.7f);
+        if(pl._isGrounded == true)attack.Play();
         yield return new WaitForSeconds(timeBetweenAttacks);
         canAttack = true;
     }
