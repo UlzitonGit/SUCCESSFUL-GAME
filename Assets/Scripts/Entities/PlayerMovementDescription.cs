@@ -47,6 +47,7 @@ public class PlayerMovementDescription : MonoBehaviour
         pl.jumpingPower = jumpSpeed;
         if (id == "evil")
         {
+            pl.jump = 0;
             pl.transform.position = FindObjectOfType<GhostEvil>().transform.position;
             Destroy(FindObjectOfType<GhostEvil>().gameObject);
             FindObjectOfType<PlayerAttack>().isEvil = true;
@@ -54,7 +55,8 @@ public class PlayerMovementDescription : MonoBehaviour
 
         if (id == "friendly")
         {
-            
+
+            pl.jump = 0;
             pl.transform.position = FindObjectOfType<GhostFriendly>().transform.position;
             Destroy(FindObjectOfType<GhostFriendly>().gameObject);
             FindObjectOfType<PlayerAttack>().isEvil = false;
