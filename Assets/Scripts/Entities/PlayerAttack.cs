@@ -39,7 +39,8 @@ public class PlayerAttack : MonoBehaviour
         canDash = false;
         pl.gameObject.layer = 7;
         anim.SetTrigger("Dash");
-        yield return new WaitForSeconds(0.5f);
+        pl.Dash();
+        yield return new WaitForSeconds(0.3f);
         pl.gameObject.layer = 6;
         yield return new WaitForSeconds(1f);
         canDash = true;

@@ -804,7 +804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 386}
+  m_AnchoredPosition: {x: 0, y: 359}
   m_SizeDelta: {x: 355.97, y: 101.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &884462408
@@ -827,7 +827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title
+  m_text: 'Codename: Faust
 
 '
   m_isRightToLeft: 0
@@ -856,13 +856,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 44.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1929,7 +1929,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 471374508}
         m_TargetAssemblyTypeName: StartScreenButtons, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: StartNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

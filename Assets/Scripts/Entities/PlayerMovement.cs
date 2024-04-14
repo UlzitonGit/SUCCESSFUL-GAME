@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGrounded = false;
     private float windSpeed = 250f;
 
+    private bool isDashing = false;
+    private int dashDirection;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -38,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(isDashing == true)
+        {
+            rb.velocity = new Vector2(gameObject.transform.localScale.x * speed * 2, rb.velocity.y);
+        }
         if (canWalk == false) return;
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if(Input.GetButton("Jump") && jump > 0 && canJump == true)
@@ -58,7 +65,20 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
-
+    public void Dash()
+    {
+        StartCoroutine(Dashing());
+    }
+    IEnumerator Dashing()
+    {
+        canWalk = false;
+        canJump = false;
+        isDashing = true;
+        yield return new WaitForSeconds(0.3f);
+        isDashing = false;
+        canJump = true;
+        canWalk = true;
+    }
     private void Flip()
     {
         if(isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
@@ -74,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
     public void StackInAir()
     {
         if (IsGrounded() == true) return;
-        rb.gravityScale = 0;
+        rb.gravityScale = 1;
         StartCoroutine(AirHolder());
     }
 

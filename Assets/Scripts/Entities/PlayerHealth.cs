@@ -71,6 +71,11 @@ public class PlayerHealth : MonoBehaviour
         if (canBeDamaged == false) return;
         StartCoroutine(GetDamage(damage));
     }
+    public void DeathZoneF()
+    {
+        health = 0;
+        Death();
+    }
     IEnumerator GetDamage(float damage)
     {
         
