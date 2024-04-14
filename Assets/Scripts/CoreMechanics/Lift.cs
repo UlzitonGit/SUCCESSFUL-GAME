@@ -13,12 +13,12 @@ public class Lift : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>() != null) collision.transform.parent = transform;
+        if (collision.gameObject.GetComponent<EnemyMovement>() == null) collision.transform.parent = transform;
 
 
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>() != null) collision.transform.parent = null;
+        if (collision.gameObject.GetComponent<EnemyMovement>() == null) collision.transform.parent = null;
     }
 }

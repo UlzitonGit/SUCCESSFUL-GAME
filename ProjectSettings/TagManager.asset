@@ -11,6 +11,7 @@ TagManager:
   - Wind
   - WindHorizontal
   - EnemyHit
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

@@ -13,15 +13,20 @@ public class PlayerMovementDescription : MonoBehaviour
     public string id;
 
     private void Awake()
+    {
+        plh = GetComponentInParent<PlayerHealth>();
+        pl = GetComponentInParent<PlayerMovement>();
+        pl.speed = speed;
+        pl.jumpingPower = jumpSpeed;
+    }
+    public void FirtsIteration()
     {      
         if(FindObjectOfType<GhostEvil>() == null && FindObjectOfType<GhostFriendly>() == null)
         {
             Instantiate(otherForm.myGhost, transform.position, transform.rotation);
         }
-        plh = GetComponentInParent<PlayerHealth>();
-        pl = GetComponentInParent<PlayerMovement>();
-        pl.speed = speed;
-        pl.jumpingPower = jumpSpeed;
+       
+       
     }
 
     void Update()
