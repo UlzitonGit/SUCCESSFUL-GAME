@@ -36,9 +36,10 @@ public class PlayerAttack : MonoBehaviour
         _playerMovementDescription[1].canSwitch = false;
         pl.StackInAir();
         anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(0.3f);
-        _aud.PlayOneShot(_audClip[Random.Range(0, _audClip.Length)]);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
+        if(pl._isGrounded == true ) _aud.PlayOneShot(_audClip[0]);
+        if (pl._isGrounded == false) _aud.PlayOneShot(_audClip[1]);
+        yield return new WaitForSeconds(0.5f);
         if(pl._isGrounded == true)attack.Play();
         yield return new WaitForSeconds(timeBetweenAttacks);
         yield return new WaitForSeconds(0.3f);

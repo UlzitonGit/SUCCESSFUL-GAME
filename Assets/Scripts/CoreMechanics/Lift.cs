@@ -27,13 +27,13 @@ public class Lift : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<EnemyMovement>() == null && horizontal == true) collision.transform.parent = transform;
+        if (collision.gameObject.GetComponent<EnemyMovement>() == null) collision.transform.parent = transform;
 
 
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<EnemyMovement>() == null && horizontal == true) collision.transform.parent = null;
+        if (collision.gameObject.GetComponent<EnemyMovement>() == null) collision.transform.parent = null;
     }
     public void PlaySound()
     {
@@ -47,10 +47,12 @@ public class Lift : MonoBehaviour
         {
             canPlaySound = true;
             _aud.Stop();
+            if (horizontal == false) FindObjectOfType<PlayerMovement>().transform.parent = null;
         }
         if (collision.CompareTag("Low") && up == false)
         {
             canPlaySound = true;
+            if(horizontal == false) FindObjectOfType<PlayerMovement>().transform.parent = null;
             _aud.Stop();
         }
     }

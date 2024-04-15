@@ -10647,6 +10647,10 @@ MonoBehaviour:
   deathSound:
   - {fileID: 8300000, guid: 7b6a5a3299c9c0444b5e80df9440f19d, type: 3}
   - {fileID: 8300000, guid: 002b321fec75c2144b31d74b1dc7a004, type: 3}
+  damageSound:
+  - {fileID: 8300000, guid: 88d352024a11de749bf4b60e9d4dfc17, type: 3}
+  - {fileID: 8300000, guid: 6e679ea051e8236459503b12ceec0a42, type: 3}
+  finishSfx: {fileID: 8300000, guid: 307378f13fb08d44bbfc2657c68643ef, type: 3}
 --- !u!114 &295334928848475671
 MonoBehaviour:
   m_ObjectHideFlags: 0

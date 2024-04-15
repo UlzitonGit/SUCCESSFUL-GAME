@@ -4,6 +4,7 @@ using UnityEngine;
 public class Bridge : MonoBehaviour
 {
     [SerializeField] Animator anim;
+    [SerializeField] Animator anim2;
     public bool isInteracted = false;
     AudioSource _aud;
     [SerializeField] AudioClip _audClip;
@@ -13,6 +14,7 @@ public class Bridge : MonoBehaviour
         _aud = GetComponent<AudioSource>();
         _aud.PlayOneShot(_audClip);
         anim.SetTrigger("Use");
+        anim2.SetTrigger("Use");
         isInteracted = true;
         StartCoroutine(AudPlay());
     }

@@ -6,7 +6,7 @@ public class SoundsVolume : MonoBehaviour
 {
     #region [SerializeField]
     //[SerializeField] private AudioSource frogs;
-    [SerializeField] private AudioSource music;
+    AudioSource[] music;
     //[SerializeField] private AudioSource sfx;
 
     [SerializeField] private TextMeshProUGUI frogsPercentText;
@@ -21,8 +21,13 @@ public class SoundsVolume : MonoBehaviour
 
     private void Awake()
     {
+        music = FindObjectsOfType<AudioSource>();
         //frogsSlider.value = frogs.volume;
-        musicSlider.value = music.volume * 100;
+        for (int i = 0; i < music.Length; i++)
+        {
+            musicSlider.value = music[i].volume * 100;
+        }
+        
         //sfxSlider.value = sfx.volume;
     }
 
@@ -38,7 +43,12 @@ public class SoundsVolume : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            music.volume = musicSlider.value / 100;
+            music = FindObjectsOfType<AudioSource>();
+            for (int i = 0; i < music.Length; i++)
+            {
+                music[i].volume = musicSlider.value / 100;
+            }
+            //musicSlider.value = music[0].volume * 100;
             musicPercentText.text = Mathf.RoundToInt(musicSlider.value) + "%";
         }
     }

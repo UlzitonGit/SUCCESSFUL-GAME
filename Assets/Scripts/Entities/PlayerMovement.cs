@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip walkSfx;
     [SerializeField] AudioClip jumpSfx;
     [SerializeField] AudioClip fallSfx;
+    [SerializeField] AudioClip windSfx;
+    [SerializeField] AudioSource _airWind;
     void Start()
     {
         pla = GetComponent<PlayerAttack>();
@@ -135,11 +137,13 @@ public class PlayerMovement : MonoBehaviour
         if (collision.CompareTag("Wind"))
         {
             Floating();
+            _airWind.enabled = true;
         }
         if (collision.CompareTag("WindHorizontal"))
         {
             FloatingHor();
             canWalk = false;
+            _airWind.enabled = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -149,6 +153,13 @@ public class PlayerMovement : MonoBehaviour
         {
             
             canWalk = true;
+            _airWind.enabled = false;
+        }
+        if (collision.CompareTag("Wind"))
+        {
+           
+            _airWind.enabled = false;
+
         }
     }
     IEnumerator AirHolder()

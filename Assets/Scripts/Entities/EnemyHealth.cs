@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] EnemyDistanceAttack enemyAttackD;
     AudioSource _aud;
     [SerializeField] AudioClip[] deathSound;
+    [SerializeField] AudioClip[] damageSound;
+    [SerializeField] AudioClip finishSfx;
     Canvas canvas;
     Rigidbody2D rb;
     bool sticked = false;
@@ -43,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.CompareTag("Attack") && canBeDamaged == true)
         {
+            _aud.PlayOneShot(damageSound[UnityEngine.Random.Range(0, damageSound.Length)]);
             part2.Play();
             StartCoroutine(Immortality());
             health -= 0.55f;
@@ -63,7 +66,7 @@ public class EnemyHealth : MonoBehaviour
         shadow.SetActive(false);
         part.Play();
         yield return new WaitForSeconds(0.3f);
-        
+        _aud.PlayOneShot(finishSfx);
         anim.SetTrigger("Death");
         yield return new WaitForSeconds(0.5f);
         rb.isKinematic = false;
