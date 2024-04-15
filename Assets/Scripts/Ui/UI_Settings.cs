@@ -1,21 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UI_Settings : MonoBehaviour
 {
     [SerializeField] private GameObject settingsPanel;
-    [SerializeField] private Button closeButton;
 
     private bool _isActive = false;
 
-    private void Start()
+    public void IsActive()
     {
-        settingsPanel.SetActive(false);
-        closeButton.onClick.AddListener(IsActive);
-    }
-
-    private void IsActive()
-    {
+        if (Input.GetMouseButton(0))
+        {
+            return;
+        }
         if (_isActive)
         {
             settingsPanel.SetActive(false);

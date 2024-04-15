@@ -28,17 +28,27 @@ public class SoundsVolume : MonoBehaviour
 
     public void FrogsVolumeChange()
     {
-        //frogs.volume = frogsSlider.value;
-        frogsPercentText.text = Mathf.RoundToInt(frogsSlider.value) + "%";
+        if (Input.GetMouseButton(0))
+        {
+            //frogs.volume = frogsSlider.value;
+            frogsPercentText.text = Mathf.RoundToInt(frogsSlider.value) + "%";
+        }
     }
     public void MusicVolumeChange()
     {
-        music.volume = musicSlider.value / 100;
-        musicPercentText.text = Mathf.RoundToInt(musicSlider.value) + "%";
+        if (Input.GetMouseButton(0))
+        {
+            music.volume = musicSlider.value / 100;
+            musicPercentText.text = Mathf.RoundToInt(musicSlider.value) + "%";
+        }
     }
     public void SFXVolumeChange()
     {
-        //sfx.volume = sfxSlider.value;
-        sfxPercentText.text = Mathf.RoundToInt(sfxSlider.value) + "%";
+        if (Input.GetMouseButton(0))
+        {
+            //sfx.volume = sfxSlider.value;
+            sfxPercentText.text = Mathf.RoundToInt(sfxSlider.value) + "%";
+        }
+
     }
 }
