@@ -12,14 +12,19 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] TextMeshProUGUI HPtext;
     public float health = 1;
     public float healthToText;
+    [SerializeField] GameObject deathPanel;
     bool canBeDamaged = true;
     PlayerAttack pl;
     public Transform currentCheckPoint;
     public int checkPointNumber = 0;
     bool getDamage = false;
     PlayerAttack pla;
+    [SerializeField] AudioSource _aud;
+    [SerializeField] AudioClip deathSound;
+    bool isDeath = false;
     private void Start()
     {
+        Time.timeScale = 1;
         pla = GetComponent<PlayerAttack>();
         checkPointNumber = PlayerPrefs.GetInt("CheckPoint");
         if(currentCheckPoint == null) currentCheckPoint = checkPoint[checkPointNumber];
@@ -29,8 +34,16 @@ public class PlayerHealth : MonoBehaviour
         FindObjectOfType<PlayerMovementDescription>().FirtsIteration();
     }
     public void Death()
-    {   
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    {
+        if (isDeath == true) return;
+        StartCoroutine(DeathCount());
+        isDeath = true;
+        _aud.Stop();
+        _aud.loop = false;
+        _aud.PlayOneShot(deathSound);
+        deathPanel.SetActive(true);
+        pl.enabled = false;
+        pla.enabled =false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -61,7 +74,7 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator PassiveHeal()
     {
 
-        if(pl.isEvil == false && health < 1 && getDamage ==false)
+        if(pl.isEvil == false && health < 1 && getDamage ==false && isDeath == false)
         {
             health += 0.0025f;
             hpBar.fillAmount = health;
@@ -80,6 +93,11 @@ public class PlayerHealth : MonoBehaviour
         health = 0;
         Death();
     }
+    IEnumerator DeathCount()
+    {
+        yield return new WaitForSeconds(1);
+        Time.timeScale =  0;
+    }
     IEnumerator GetDamage(float damage)
     {
         getDamage = true;
@@ -92,6 +110,9 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         getDamage = false;
+        if(health <= 0) health = 0;
+        hpBar.fillAmount = health;
+        HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
         if (pla.isEvil == false) StartCoroutine(PassiveHeal());
         if (health <= 0.05f)
         {

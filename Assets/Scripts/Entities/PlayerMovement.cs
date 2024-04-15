@@ -22,9 +22,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    [SerializeField] Animator anim1;
     [SerializeField] Animator anim;
     PlayerAttack pla;
-    
+
+    bool playFallSound = true;
+    bool isPlayingWalk = false;
+    [SerializeField] AudioSource _audWalk;
+    [SerializeField] AudioSource _audJump;
+    [SerializeField] AudioClip walkSfx;
+    [SerializeField] AudioClip jumpSfx;
+    [SerializeField] AudioClip fallSfx;
     void Start()
     {
         pla = GetComponent<PlayerAttack>();
@@ -38,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         if (_isGrounded == true && pla.isEvil == true) jump = 1;
         if (_isGrounded == true && pla.isEvil == false) jump = 2;
         anim.SetBool("Fall", !_isGrounded && pla.isEvil == false);
+        anim1.SetBool("Fall", !_isGrounded && pla.isEvil == true);
     }
 
     private void FixedUpdate()
@@ -47,18 +57,38 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(gameObject.transform.localScale.x * speed * 2, rb.velocity.y);
         }
         if (canWalk == false) return;
+        anim.SetBool("Walk", horizontal != 0 && pla.isEvil == false);
+        anim1.SetBool("Walk", horizontal != 0 && pla.isEvil == true);
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         if(Input.GetButton("Jump") && jump > 0 && canJump == true)
         {
             Jump();
             StartCoroutine(ReloadDash());
         }
-        
+        if (horizontal != 0 && _isGrounded == true && isPlayingWalk == false)
+        {
+            _audWalk.PlayOneShot(walkSfx);
+            isPlayingWalk = true;
+        }
+        if (horizontal == 0 || _isGrounded == false)
+        {
+            _audWalk.Stop();
+            isPlayingWalk = false;
+        }
+        if(_isGrounded == true && playFallSound == true)
+        {
+            _audJump.PlayOneShot(fallSfx);
+            playFallSound = false;
+        }
+        if (_isGrounded == false) playFallSound = true;
+
     }
 
     private void Jump()
     {
-        anim.SetTrigger("Jump");
+        _audJump.PlayOneShot(jumpSfx);
+        if(pla.isEvil == false) anim.SetTrigger("Jump");
+        if (pla.isEvil == true) anim1.SetTrigger("Jump");
         jump -= 1;
         rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
     }

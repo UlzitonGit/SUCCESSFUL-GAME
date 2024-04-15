@@ -9,7 +9,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] ParticleSystem part;
     public float timeBetweenAttacks = 1;
     private bool canAttack = true;
-
+    [SerializeField] PlayerMovementDescription[] _playerMovementDescription;
+    AudioSource _aud;
+    [SerializeField] AudioClip[] _audClip;
     PlayerMovement pl;
     bool canDash = true;
 
@@ -17,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        _aud = GetComponent<AudioSource>();
         pl = GetComponent<PlayerMovement>();
     }
 
@@ -29,16 +32,23 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator Attacking()
     {
         canAttack = false;
-        
+        _playerMovementDescription[0].canSwitch = false;
+        _playerMovementDescription[1].canSwitch = false;
         pl.StackInAir();
         anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.3f);
+        _aud.PlayOneShot(_audClip[Random.Range(0, _audClip.Length)]);
+        yield return new WaitForSeconds(0.4f);
         if(pl._isGrounded == true)attack.Play();
         yield return new WaitForSeconds(timeBetweenAttacks);
+        yield return new WaitForSeconds(0.3f);
+        _playerMovementDescription[0].canSwitch = true;
+        _playerMovementDescription[1].canSwitch = true;
         canAttack = true;
     }
     IEnumerator Dashing()
     {
+        //_playerMovementDescription.canSwitch = false;
         part.Play();
         canDash = false;
         pl.gameObject.layer = 7;
@@ -46,7 +56,8 @@ public class PlayerAttack : MonoBehaviour
         pl.Dash();
         yield return new WaitForSeconds(0.3f);
         pl.gameObject.layer = 6;
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1f);
+        //_playerMovementDescription.canSwitch = true;
         canDash = true;
     }
 }

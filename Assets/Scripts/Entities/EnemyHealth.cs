@@ -12,12 +12,17 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] GameObject shadow;
     [SerializeField] ParticleSystem part;
     [SerializeField] ParticleSystem part2;
+    [SerializeField] EnemyAttack enemyAttack;
+    [SerializeField] EnemyDistanceAttack enemyAttackD;
+    AudioSource _aud;
+    [SerializeField] AudioClip[] deathSound;
     Canvas canvas;
     Rigidbody2D rb;
     bool sticked = false;
     PosIng pos;
     private void Start()
     {
+        _aud = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         pos = FindObjectOfType<PosIng>();
         canvas = GetComponentInChildren<Canvas>();
@@ -27,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         if(sticked == true)
         {
             pos = FindObjectOfType<PosIng>();
+            if (pos == null) return;
             transform.position = Vector3.Lerp(transform.position, pos.transform.position, Time.deltaTime * 10);
             Vector3 difference = pos.transform.position - transform.position;
             float rotZ = MathF.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
@@ -47,10 +53,11 @@ public class EnemyHealth : MonoBehaviour
     }
     IEnumerator Death()
     {
-        
+        if (enemyAttack != null) enemyAttack.isDeath = true;
+        if (enemyAttackD != null) enemyAttackD.isDeath = true;
         rb.isKinematic =true;
         GetComponent<CapsuleCollider2D>().isTrigger = true;
-        
+        _aud.PlayOneShot(deathSound[UnityEngine.Random.Range(0, deathSound.Length)]);
         sticked = true;
         canvas.gameObject.SetActive(false);
         shadow.SetActive(false);

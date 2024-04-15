@@ -19,7 +19,7 @@ public class LevelLoader : MonoBehaviour
     public void StartNewGame()
     {
         PlayerPrefs.SetInt("CheckPoint", 0);
-        StartCoroutine(LoadLevel(1));
+        StartCoroutine(LoadLevel(2));
     }
     IEnumerator LoadLevel(int index)
     {

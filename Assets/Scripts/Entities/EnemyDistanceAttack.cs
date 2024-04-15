@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyDistanceAttack : MonoBehaviour
 {
     PlayerMovement pl;
+    public bool isDeath = false;
     [SerializeField] GameObject bullet;
     bool canAttack = true;
     float rotZ = 0;
@@ -24,7 +25,7 @@ public class EnemyDistanceAttack : MonoBehaviour
     public void Attack(float dir)
     {
         if (canAttack == false) return;
-        
+        if (isDeath == true) return;
         GameObject bulletD = Instantiate(bullet, transform.position, transform.rotation);
         
         StartCoroutine(Reload());

@@ -11,7 +11,7 @@ public class PlayerMovementDescription : MonoBehaviour
     [SerializeField] public GameObject myGhost;
     [SerializeField] ParticleSystem soulPart;
     public string id;
-
+    public bool canSwitch = true;
     private void Awake()
     {
         plh = GetComponentInParent<PlayerHealth>();
@@ -31,7 +31,7 @@ public class PlayerMovementDescription : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && canSwitch == true)
         {
             otherForm.gameObject.SetActive(true);
                         

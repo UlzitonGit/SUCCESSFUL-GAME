@@ -33,9 +33,10 @@ public class EnemyMovement : MonoBehaviour
         if (enh.health <= 0) return;
         float distanceFromPlayer = player.position.x - transform.position.x;
         if (Mathf.Abs(distanceFromPlayer) < range) Chaising(distanceFromPlayer);
+        else Finding();
         if (Mathf.Abs(distanceFromPlayer) < rangeAttack && _enemyAttack != null) _enemyAttack.Attack();
         if (Mathf.Abs(distanceFromPlayer) < rangeAttack && _enemyAttackD != null) _enemyAttackD.Attack(gameObject.transform.localScale.x);
-        else Finding();
+        
     }
     private void Chaising(float distanceFromPlayer)
     {

@@ -5,10 +5,12 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] GameObject _hit;
     bool  canAttack = true;
+    public bool isDeath = false;
     
     public void Attack()
     {
         if (canAttack == false) return;
+        if (isDeath == true) return;
         StartCoroutine(Attacking());
     }
     IEnumerator Attacking()
