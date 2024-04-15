@@ -27,7 +27,7 @@ public class SoundsVolume : MonoBehaviour
         {
             musicSlider.value = music[i].volume * 100;
         }
-        
+
         //sfxSlider.value = sfx.volume;
     }
 
@@ -41,7 +41,7 @@ public class SoundsVolume : MonoBehaviour
     }
     public void MusicVolumeChange()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || Input.GetButton("Horizontal"))
         {
             music = FindObjectsOfType<AudioSource>();
             for (int i = 0; i < music.Length; i++)
@@ -50,7 +50,9 @@ public class SoundsVolume : MonoBehaviour
             }
             //musicSlider.value = music[0].volume * 100;
             musicPercentText.text = Mathf.RoundToInt(musicSlider.value) + "%";
+
         }
+        
     }
     public void SFXVolumeChange()
     {

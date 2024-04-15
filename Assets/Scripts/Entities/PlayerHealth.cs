@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -12,7 +13,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] TextMeshProUGUI HPtext;
     public float health = 1;
     public float healthToText;
-    [SerializeField] GameObject deathPanel;
     bool canBeDamaged = true;
     PlayerAttack pl;
     public Transform currentCheckPoint;
@@ -22,6 +22,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] AudioSource _aud;
     [SerializeField] AudioClip deathSound;
     bool isDeath = false;
+
+    [SerializeField] private Animator transition;
+    [SerializeField] private GameObject deathPanel;
+    private float transitionTime = 1f;
     private void Start()
     {
         Time.timeScale = 1;
@@ -36,12 +40,11 @@ public class PlayerHealth : MonoBehaviour
     public void Death()
     {
         if (isDeath == true) return;
-        StartCoroutine(DeathCount());
+        StartCoroutine(BlackScreen());
         isDeath = true;
         _aud.Stop();
         _aud.loop = false;
         _aud.PlayOneShot(deathSound);
-        deathPanel.SetActive(true);
         pl.enabled = false;
         pla.enabled =false;
     }
@@ -118,5 +121,12 @@ public class PlayerHealth : MonoBehaviour
         {
             Death();
         }
+    }
+    IEnumerator BlackScreen()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
+        deathPanel.SetActive(true);
+        StartCoroutine(DeathCount());
     }
 }

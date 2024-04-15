@@ -1106,7 +1106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d7059ecbe678247aa63ac44a01a5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music: {fileID: 1633072318}
   frogsPercentText: {fileID: 799076227}
   musicPercentText: {fileID: 1196612450}
   sfxPercentText: {fileID: 339890816}
@@ -4580,7 +4579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7077038770535691279, guid: 62a3b34bfacea8641843ba150eeb7ee5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6516.4316
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7077038770535691279, guid: 62a3b34bfacea8641843ba150eeb7ee5, type: 3}
       propertyPath: m_LocalRotation.w
