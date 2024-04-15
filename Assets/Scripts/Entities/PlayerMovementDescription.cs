@@ -44,6 +44,7 @@ public class PlayerMovementDescription : MonoBehaviour
     public void ChangeParameters()
     {
         pl.speed = speed;
+        FindObjectOfType<Ui_ProfilePicture>().ChangePicture();
         pl.jumpingPower = jumpSpeed;
         if (id == "evil")
         {

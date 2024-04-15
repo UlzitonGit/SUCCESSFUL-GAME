@@ -12,13 +12,12 @@ public class Ui_ProfilePicture : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-            ChangePicture();
+       
 
         HP_text.text = Mathf.RoundToInt(playerHealth.health * 100).ToString() + "/" + playerHealth.healthToText;
     }
 
-    private void ChangePicture()
+    public void ChangePicture()
     {
         if (_isGood)
         {
