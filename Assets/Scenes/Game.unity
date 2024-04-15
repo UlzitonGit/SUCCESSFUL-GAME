@@ -30345,10 +30345,10 @@ RectTransform:
   m_Father: {fileID: 1875463398}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 877.5, y: 467.2}
-  m_SizeDelta: {x: -1820, y: -980}
+  m_AnchoredPosition: {x: -82.5, y: -71.17377}
+  m_SizeDelta: {x: 100, y: 96.7474}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &813372592 stripped
 Transform:
@@ -37457,7 +37457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 383.83997}
+  m_AnchoredPosition: {x: 0, y: 383.83997}
   m_SizeDelta: {x: -278.9789, y: -768.0377}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939809667
@@ -66699,7 +66699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1313105469}
-  closeButton: {fileID: 807633259}
 --- !u!4 &1651781004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5662090132005170116, guid: 3da4c15bba431b24f8f1ecef097400e8, type: 3}
