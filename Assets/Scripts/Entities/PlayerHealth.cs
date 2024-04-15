@@ -95,7 +95,7 @@ public class PlayerHealth : MonoBehaviour
     }
     IEnumerator DeathCount()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Time.timeScale =  0;
     }
     IEnumerator GetDamage(float damage)
