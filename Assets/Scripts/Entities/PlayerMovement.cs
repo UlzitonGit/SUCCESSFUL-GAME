@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
+    [SerializeField] Animator anim;
     PlayerAttack pla;
     
     void Start()
@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = IsGrounded() && canJump == true;
         if (_isGrounded == true && pla.isEvil == true) jump = 1;
         if (_isGrounded == true && pla.isEvil == false) jump = 2;
+        anim.SetBool("Fall", !_isGrounded && pla.isEvil == false);
     }
 
     private void FixedUpdate()
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        anim.SetTrigger("Jump");
         jump -= 1;
         rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
     }

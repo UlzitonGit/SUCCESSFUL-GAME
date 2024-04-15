@@ -16,8 +16,11 @@ public class PlayerHealth : MonoBehaviour
     PlayerAttack pl;
     public Transform currentCheckPoint;
     public int checkPointNumber = 0;
+    bool getDamage = false;
+    PlayerAttack pla;
     private void Start()
     {
+        pla = GetComponent<PlayerAttack>();
         checkPointNumber = PlayerPrefs.GetInt("CheckPoint");
         if(currentCheckPoint == null) currentCheckPoint = checkPoint[checkPointNumber];
         transform.position = currentCheckPoint.position;
@@ -57,9 +60,10 @@ public class PlayerHealth : MonoBehaviour
     }
     IEnumerator PassiveHeal()
     {
-        if(pl.isEvil == false && health < 1)
+
+        if(pl.isEvil == false && health < 1 && getDamage ==false)
         {
-            health += 0.005f;
+            health += 0.0025f;
             hpBar.fillAmount = health;
             yield return new WaitForSeconds(0.15f);
             if (health > 1) health = 1;
@@ -78,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
     }
     IEnumerator GetDamage(float damage)
     {
-        
+        getDamage = true;
         StartCoroutine(Immortallity());
         for (float i = 0; i < damage; i += 0.05f)
         {
@@ -87,6 +91,8 @@ public class PlayerHealth : MonoBehaviour
             HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
             yield return new WaitForSeconds(0.1f);
         }
+        getDamage = false;
+        if (pla.isEvil == false) StartCoroutine(PassiveHeal());
         if (health <= 0.05f)
         {
             Death();
