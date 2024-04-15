@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class SoundsVolume : MonoBehaviour
 {
     #region [SerializeField]
-    /*[SerializeField] private AudioSource frogs;
+    //[SerializeField] private AudioSource frogs;
     [SerializeField] private AudioSource music;
-    [SerializeField] private AudioSource sfx;*/
+    //[SerializeField] private AudioSource sfx;
 
     [SerializeField] private TextMeshProUGUI frogsPercentText;
     [SerializeField] private TextMeshProUGUI musicPercentText;
@@ -22,7 +22,7 @@ public class SoundsVolume : MonoBehaviour
     private void Awake()
     {
         //frogsSlider.value = frogs.volume;
-        //musicSlider.value = music.volume;
+        musicSlider.value = music.volume * 100;
         //sfxSlider.value = sfx.volume;
     }
 
@@ -33,7 +33,7 @@ public class SoundsVolume : MonoBehaviour
     }
     public void MusicVolumeChange()
     {
-        //music.volume = musicSlider.value;
+        music.volume = musicSlider.value / 100;
         musicPercentText.text = Mathf.RoundToInt(musicSlider.value) + "%";
     }
     public void SFXVolumeChange()
