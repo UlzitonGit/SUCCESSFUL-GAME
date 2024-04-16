@@ -114,20 +114,22 @@ public class PlayerHealth : MonoBehaviour
         {
 
             health -= 0.05f;
-            if (health <= 0) health = 0;
+            
             hpBar.fillAmount = health;
             HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
             yield return new WaitForSeconds(0.1f);
         }
         getDamage = false;
         if(health <= 0) health = 0;
-        hpBar.fillAmount = health;
-        HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
-        if (pla.isEvil == false) StartCoroutine(PassiveHeal());
-        if (health <= 0.00f)
+        if (health <= 0.02f)
         {
             Death();
         }
+        hpBar.fillAmount = health;
+        
+        HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
+        if (pla.isEvil == false) StartCoroutine(PassiveHeal());
+        
     }
     IEnumerator BlackScreen()
     {
