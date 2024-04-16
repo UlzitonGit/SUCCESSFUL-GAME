@@ -79,7 +79,7 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator Immortality()
     {
         canBeDamaged = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.8f);
         canBeDamaged = true;
     }
 }

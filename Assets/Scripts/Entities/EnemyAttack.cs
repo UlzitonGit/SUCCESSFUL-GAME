@@ -6,11 +6,13 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] GameObject _hit;
     bool  canAttack = true;
     public bool isDeath = false;
-    
+    Animator anim;
     public void Attack()
     {
         if (canAttack == false) return;
         if (isDeath == true) return;
+        anim = GetComponentInChildren<Animator>();
+        anim.SetTrigger("Attack");
         StartCoroutine(Attacking());
     }
     IEnumerator Attacking()

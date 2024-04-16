@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.15f, groundLayer);
     }
     public void Dash()
     {
@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator ReloadDash()
     {
         canJump = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         canJump = true;
     }
     

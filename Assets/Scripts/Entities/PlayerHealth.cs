@@ -112,7 +112,9 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(Immortallity());
         for (float i = 0; i < damage; i += 0.05f)
         {
+
             health -= 0.05f;
+            if (health <= 0) health = 0;
             hpBar.fillAmount = health;
             HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
             yield return new WaitForSeconds(0.1f);

@@ -48,9 +48,18 @@ public class EnemyMovement : MonoBehaviour
     private void Finding()
     {
         float distanceFromPoint = 0;
-        if (point > 1) point = 0; 
-        if(point == 0)  distanceFromPoint = point1.position.x - transform.position.x;
-        if (point == 1)  distanceFromPoint = point2.position.x - transform.position.x;
+        if (point > 1) point = 0;
+        if (point == 0)
+        {
+            distanceFromPoint = point1.position.x - transform.position.x;
+            
+        }
+        if (point == 1)
+        {
+            distanceFromPoint = point2.position.x - transform.position.x;
+            
+        }
+          
         if (point == 0 && Mathf.Abs(distanceFromPoint) <= 0.5)
         {
             point = 1;
@@ -73,6 +82,7 @@ public class EnemyMovement : MonoBehaviour
             distanceFromPoint = 1;
           
         }
+        transform.localScale = new Vector3(distanceFromPoint, 1, 1);
         rb.velocity = new Vector2(distanceFromPoint * speed, rb.velocity.y);
     }
     

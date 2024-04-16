@@ -8,6 +8,7 @@ public class EnemyDistanceAttack : MonoBehaviour
     PlayerMovement pl;
     public bool isDeath = false;
     [SerializeField] GameObject bullet;
+    [SerializeField] Animator animator;
     bool canAttack = true;
     float rotZ = 0;
     private void Start()
@@ -27,7 +28,7 @@ public class EnemyDistanceAttack : MonoBehaviour
         if (canAttack == false) return;
         if (isDeath == true) return;
         GameObject bulletD = Instantiate(bullet, transform.position, transform.rotation);
-        
+        animator.SetTrigger("Attack");
         StartCoroutine(Reload());
     }
     IEnumerator Reload()
