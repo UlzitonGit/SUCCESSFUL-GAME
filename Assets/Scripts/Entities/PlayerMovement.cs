@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool playFallSound = true;
     bool isPlayingWalk = false;
-    [SerializeField] Image dashBar;
+    
     [SerializeField] AudioSource _audWalk;
     [SerializeField] AudioSource _audJump;
     [SerializeField] AudioClip walkSfx;
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         pla = GetComponent<PlayerAttack>();
-        dashBar.fillAmount = dashing;
+       
     }
 
     void Update()
