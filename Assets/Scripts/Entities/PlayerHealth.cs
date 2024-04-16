@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Transform[] checkPoint;
-    [SerializeField] Image hpBar;
+    
     [SerializeField] TextMeshProUGUI HPtext;
     public float health = 1;
     public float healthToText;
@@ -22,7 +22,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] AudioSource _aud;
     [SerializeField] AudioClip deathSound;
     bool isDeath = false;
-
+    [SerializeField] Animator animWhite;
+    [SerializeField] Animator animRed;
+    [SerializeField] Image hpBar;
     [SerializeField] private Animator transition;
     [SerializeField] private GameObject deathPanel;
     private float transitionTime = 1f;
@@ -32,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         pla = GetComponent<PlayerAttack>();
         checkPointNumber = PlayerPrefs.GetInt("CheckPoint");
         if(currentCheckPoint == null) currentCheckPoint = checkPoint[checkPointNumber];
+        FindObjectOfType<CameraController>().teleport();
         transform.position = currentCheckPoint.position;
         pl = GetComponent<PlayerAttack>();
         healthToText = health * 100;
@@ -104,6 +107,8 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator GetDamage(float damage)
     {
         getDamage = true;
+        animRed.SetTrigger("Damage");
+        animWhite.SetTrigger("Damage");
         StartCoroutine(Immortallity());
         for (float i = 0; i < damage; i += 0.05f)
         {
@@ -117,7 +122,7 @@ public class PlayerHealth : MonoBehaviour
         hpBar.fillAmount = health;
         HPtext.text = Mathf.RoundToInt(health * 100).ToString() + "/" + healthToText;
         if (pla.isEvil == false) StartCoroutine(PassiveHeal());
-        if (health <= 0.05f)
+        if (health <= 0.00f)
         {
             Death();
         }

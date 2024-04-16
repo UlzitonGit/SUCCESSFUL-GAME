@@ -1,12 +1,17 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] GameObject attackCollider;
+    [SerializeField] GameObject reloadingImage;
     [SerializeField] Animator anim;
     [SerializeField] ParticleSystem attack;
     [SerializeField] ParticleSystem part;
+    [SerializeField] Image dashBar;
+    float dashing = 1;
+    [SerializeField] Image reloadImage;
     public float timeBetweenAttacks = 1;
     private bool canAttack = true;
     [SerializeField] PlayerMovementDescription[] _playerMovementDescription;
@@ -14,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] AudioClip[] _audClip;
     PlayerMovement pl;
     bool canDash = true;
-
+    float reload = 1;
     public bool isEvil = false;
 
     void Start()
@@ -31,11 +36,13 @@ public class PlayerAttack : MonoBehaviour
     }
     IEnumerator Attacking()
     {
+       
         canAttack = false;
         _playerMovementDescription[0].canSwitch = false;
         _playerMovementDescription[1].canSwitch = false;
         pl.StackInAir();
         anim.SetTrigger("Attack");
+        StartCoroutine(ReloadShow());
         yield return new WaitForSeconds(0.2f);
         if(pl._isGrounded == true ) _aud.PlayOneShot(_audClip[0]);
         if (pl._isGrounded == false) _aud.PlayOneShot(_audClip[1]);
@@ -47,6 +54,20 @@ public class PlayerAttack : MonoBehaviour
         _playerMovementDescription[1].canSwitch = true;
         canAttack = true;
     }
+    IEnumerator ReloadShow()
+    {
+        reloadingImage.SetActive(true);
+        reload = 0;
+        reloadImage.fillAmount = reload;
+        for (int i = 0; i < 10; i++)
+        {
+            reload += 0.1f;
+            reloadImage.fillAmount = reload;
+            yield return new WaitForSeconds(0.13f);
+            
+        }
+        reloadingImage.SetActive(false);
+    }
     IEnumerator Dashing()
     {
         //_playerMovementDescription.canSwitch = false;
@@ -55,10 +76,23 @@ public class PlayerAttack : MonoBehaviour
         pl.gameObject.layer = 7;
         anim.SetTrigger("Dash");
         pl.Dash();
+        StartCoroutine(reloadDashing());
         yield return new WaitForSeconds(0.3f);
         pl.gameObject.layer = 6;
         yield return new WaitForSeconds(1f);
         //_playerMovementDescription.canSwitch = true;
         canDash = true;
+    }
+    IEnumerator reloadDashing()
+    {
+        dashing = 0;
+        dashBar.fillAmount = dashing;
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.13f);
+            dashing += 0.1f;
+            dashBar.fillAmount = dashing;
+        }
+        
     }
 }

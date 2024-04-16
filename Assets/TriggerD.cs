@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TriggerD : MonoBehaviour
 {
+    [SerializeField] GameObject[] images;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,10 @@ public class TriggerD : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GetComponent<SpriteRenderer>().enabled = true;
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i].SetActive(true);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -27,6 +32,10 @@ public class TriggerD : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GetComponent<SpriteRenderer>().enabled = false;
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i].SetActive(false);
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpingPower = 11f;
     private bool canJump = true;
     public int jump = 1;
+    private float dashing = 1;
 
     private bool isFacingRight = true;
     public bool _isGrounded = false;
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool playFallSound = true;
     bool isPlayingWalk = false;
+    [SerializeField] Image dashBar;
     [SerializeField] AudioSource _audWalk;
     [SerializeField] AudioSource _audJump;
     [SerializeField] AudioClip walkSfx;
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         pla = GetComponent<PlayerAttack>();
+        dashBar.fillAmount = dashing;
     }
 
     void Update()
@@ -145,6 +150,7 @@ public class PlayerMovement : MonoBehaviour
             canWalk = false;
             _airWind.enabled = true;
         }
+        if (collision.CompareTag("Finish")) SceneManager.LoadScene(3);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

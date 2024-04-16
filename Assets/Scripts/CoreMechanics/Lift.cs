@@ -47,12 +47,12 @@ public class Lift : MonoBehaviour
         {
             canPlaySound = true;
             _aud.Stop();
-            if (horizontal == false) FindObjectOfType<PlayerMovement>().transform.parent = null;
+            //if (horizontal == false) FindObjectOfType<PlayerMovement>().transform.parent = null;
         }
         if (collision.CompareTag("Low") && up == false)
         {
             canPlaySound = true;
-            if(horizontal == false) FindObjectOfType<PlayerMovement>().transform.parent = null;
+            //if(horizontal == false) FindObjectOfType<PlayerMovement>().transform.parent = null;
             _aud.Stop();
         }
     }
